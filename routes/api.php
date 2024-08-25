@@ -19,6 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('items', ItemController::class);
+Route::middleware(['api', 'throttle:api'])->group(function () {
+    Route::apiResource('items', ItemController::class);
+});
+
 
 
